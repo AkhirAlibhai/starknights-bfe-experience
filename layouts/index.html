@@ -1,0 +1,43 @@
+{{ define "main" }}
+<div class="w-screen h-[100dvh] flex items-center justify-center bg-black">
+
+    <!-- Phone Container -->
+    <div
+        class="aspect-[9/19.5] h-full max-w-[calc(100dvh*0.4615)] w-auto bg-cover bg-center text-white shadow-2xl overflow-hidden border sm:border-4 border-gray-800 sm:rounded-[2.5rem] relative">
+
+        <!-- Dark overlay -->
+        <div class="absolute inset-0 bg-black/40 backdrop-blur-sm z-0"></div>
+
+        <!-- Status Bar -->
+        <div class="relative z-10 w-full h-10 flex justify-between items-center px-4 pt-4 font-mono text-lg status-bar">
+            <span class="flex items-center h-full text-2xl font-semibold">PhaseTel</span>
+            <div class="flex space-x-2 items-center h-full">
+                <span class="flex items-center h-full">
+                    <img src="/images/signal-status.png" class="invert h-full w-auto" />
+                </span>
+                <span class="flex items-center h-full">
+                    <img src="/images/internet.png" class="invert h-full w-auto" />
+                </span>
+                <span class="flex items-center h-full">
+                    <img src="/images/low-battery.png" class="invert h-full w-auto" />
+                </span>
+            </div>
+        </div>
+
+
+        <!-- Clock & Date -->
+        <div class="relative z-10 text-center mt-32">
+            <div class="text-6xl font-light tracking-wide mb-2">9:41</div>
+            <div class="text-md font-light opacity-80">{{ now.Format "Monday, January 2" }}</div>
+        </div>
+
+        <!-- Lock / Swipe -->
+        <div class="relative z-10 text-center pb-8 absolute bottom-0 w-full">
+            <div class="text-2xl mb-2">🔒</div>
+            <div class="text-sm uppercase tracking-widest opacity-80">Swipe up to unlock</div>
+        </div>
+
+    </div>
+
+</div>
+{{ end }}

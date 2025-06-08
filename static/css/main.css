@@ -1,0 +1,17 @@
+.hide-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* Status bar and icon scaling */
+.status-bar {
+    height: 1.5rem;
+    min-height: 1.5rem;
+    max-height: 1.5rem;
+    display: flex;
+    align-items: center;
+}
