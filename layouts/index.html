@@ -1,5 +1,5 @@
 {{ define "main" }}
-<div class="w-screen h-[100dvh] flex items-center justify-center bg-black">
+<div class="w-screen h-[100dvh] flex items-center justify-center" style="background-color: #212429;">
 
     <!-- Phone Container -->
     <div class="aspect-[9/19.5] h-full max-w-[calc(100dvh*0.4615)] w-auto bg-cover bg-center text-white relative">
@@ -23,8 +23,8 @@
 
         <!-- Clock & Date -->
         <div class="relative z-10 text-center mt-32">
-            <div class="locking">{{ now.Format "Monday, January 2" }}</div>
-            <div class="locking" style="font-size: 6.375em; margin-top: -0.25em;">{{ now.Format "15:04"}}</div>
+            <p class="locking">{{ now.Format "Monday, January 2" }}</p>
+            <p class="locking" style="font-size: 6.375em; margin-top: -0.25em;">{{ now.Format "15:04"}}</p>
         </div>
 
         <!-- Lock / Swipe -->
