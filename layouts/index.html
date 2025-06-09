@@ -2,7 +2,8 @@
 <div id="root" class="w-screen h-[100dvh] flex items-center justify-center">
 
     <!-- Phone Container -->
-    <div class="aspect-[9/19.5] h-full max-w-[calc(100dvh*0.4615)] w-auto bg-cover bg-center text-white relative">
+    <div id="phonecontainer"
+        class="aspect-[9/19.5] h-full max-w-[calc(100dvh*0.4615)] w-auto bg-cover bg-center text-white relative">
 
         <!-- Status Bar -->
         <div class="justify-between status-bar px-4 py-6 h-16 flex items-center">
@@ -22,7 +23,7 @@
 
 
         <!-- Clock & Date -->
-        <div class="relative text-center mt-32">
+        <div id="timedisplay" class="relative text-center mt-32">
             <p class="locking">{{ now.Format "Monday, January 2" }}</p>
             <p class="locking time">{{ now.Format "15:04"}}</p>
         </div>
