@@ -1,3 +1,7 @@
+#root {
+    background-color: #212429;
+}
+
 .hide-scrollbar::-webkit-scrollbar {
     display: none;
 }
