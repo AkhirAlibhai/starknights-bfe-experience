@@ -7,6 +7,20 @@ A mini-voice pack inspired by Alice! This will be a collection of light-hearted 
 References https://8892314440.date heavily.
 
 
+## Adding New Messages
+To add a new message, add a new entry to the `src/data/messages.json` file. It must match the schema detailed below.
+
+### Schema
+```
+{
+    'id': 1,
+    'writer': "Jelly",
+    'speaker': "Hoshiumi",
+    'image': "image.png" // optional
+    'audio': "audio.[mp3|aac|flac|wav|ogg]"
+}
+```
+
 ## Project Setup
 
 ```sh
