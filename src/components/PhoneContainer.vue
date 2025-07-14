@@ -48,20 +48,28 @@ const unlockPhone = () => {
   showUnlock.value = false
 }
 
-const formattedDate = new Date().toLocaleDateString('en-US', {
-  weekday: 'long',
-  month: 'long',
-  day: 'numeric',
-})
-const formattedTime = new Date().toLocaleTimeString([], {
-  hour: '2-digit',
-  minute: '2-digit',
-  hour12: false,
-})
+const formattedDate = ref('')
+const formattedTime = ref('')
+
+const updateTime = () => {
+  const now = new Date()
+  formattedDate.value = now.toLocaleDateString('en-US', {
+    weekday: 'long',
+    month: 'long',
+    day: 'numeric',
+  })
+  formattedTime.value = now.toLocaleTimeString([], {
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+  })
+}
 
 onMounted(() => {
   setTimeout(() => {
     pageLoaded.value = true
   }, 10)
+  updateTime()
+  setInterval(updateTime, 1000)
 })
 </script>
