@@ -1,3 +1,15 @@
+import './assets/main.css'
+
+import { createApp } from 'vue'
+import App from './App.vue'
+import router from './router'
+
+const app = createApp(App)
+
+app.use(router)
+
+app.mount('#app')
+
 function unlockPhone() {
     var timeDisplay = document.getElementById('timedisplay');
     if (timeDisplay) {
@@ -13,15 +25,11 @@ function unlockPhone() {
 document.addEventListener('DOMContentLoaded', function () {
     // Fade in and unblur effect for the whole page
     var phoneContainer = document.getElementById('phonecontainer');
-    if (phoneContainer) {
-        setTimeout(function () {
-            phoneContainer.classList.add('page-loaded');
-        }, 10);
-    }
+    setTimeout(function () {
+        phoneContainer?.classList.add('page-loaded');
+    }, 10);
     var unlockBtn = document.getElementById('unlockbutton');
-    if (unlockBtn) {
-        unlockBtn.addEventListener('click', function (e) {
-            unlockPhone();
-        });
-    }
+    unlockBtn?.addEventListener('click', function (e) {
+        unlockPhone();
+    });
 });
