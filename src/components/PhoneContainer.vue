@@ -28,23 +28,8 @@
         <li><a href="#" class="button n01" @click.prevent="unlockPhone">Tap to Unlock</a></li>
       </ul>
 
-      <!-- Home Screen (shown after unlock) -->
-      <div id="homescreen" v-show="showHomeScreen"
-        class="absolute inset-0 flex flex-col items-center justify-center z-20">
-        <div class="grid grid-cols-3 gap-6 p-8">
-          <div class="flex flex-col items-center">
-            <div class="bg-gray-800 rounded-2xl w-16 h-16 flex items-center justify-center text-3xl cursor-pointer"
-              @click="openPhoneApp">
-              📞</div>
-            <span class="mt-2 text-sm text-white">Phone</span>
-          </div>
-          <div class="flex flex-col items-center">
-            <div class="bg-gray-800 rounded-2xl w-16 h-16 flex items-center justify-center text-3xl cursor-pointer">
-              💬</div>
-            <span class="mt-2 text-sm text-white">Voicemail</span>
-          </div>
-        </div>
-      </div>
+      <!-- Home Screen (split out as a component) -->
+      <HomeScreen :showHomeScreen="showHomeScreen" @openPhoneApp="openPhoneApp" />
 
       <!-- Phone App UI (Dial Pad) -->
       <div id="phoneApp" v-show="showPhoneApp"
@@ -81,6 +66,7 @@ import { ref, onMounted } from 'vue'
 import signalStatusImg from '@/assets/signal-status.png'
 import internetImg from '@/assets/internet.png'
 import lowBatteryImg from '@/assets/low-battery.png'
+import HomeScreen from './HomeScreen.vue'
 
 const pageLoaded = ref(false)
 const showTime = ref(true)
