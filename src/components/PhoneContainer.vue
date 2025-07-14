@@ -59,9 +59,11 @@ const unlockPhone = () => {
 
 const openPhoneApp = () => {
   showPhoneApp.value = true
+  showHomeScreen.value = false
 }
 const closePhoneApp = () => {
   showPhoneApp.value = false
+  showHomeScreen.value = true
 }
 
 const formattedDate = ref('')

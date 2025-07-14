@@ -1,6 +1,5 @@
 <template>
-    <div id="phoneApp" v-show="showPhoneApp"
-        class="absolute inset-0 bg-gray-900 flex flex-col items-center justify-center z-30">
+    <div id="phoneApp" v-show="showPhoneApp" class="absolute inset-0 flex flex-col items-center justify-center z-30">
         <div class="w-full max-w-xs mx-auto p-4">
             <input type="text" :value="dialInput" readonly
                 class="w-full mb-4 p-2 rounded text-lg text-center bg-gray-800 text-white" />
