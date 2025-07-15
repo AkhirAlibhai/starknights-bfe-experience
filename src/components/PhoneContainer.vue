@@ -8,13 +8,13 @@
         <span class="flex items-center text-3xl font-mono">PhaseTel</span>
         <div class="flex space-x-4 items-center h-full">
           <span class="flex items-center h-full">
-            <img :src="signalStatusImg" class="invert" style="height:2rem;width:auto;" />
+            <img :src="signalStatusImg" alt="Signal status icon" class="invert" style="height:2rem;width:auto;" />
           </span>
           <span class="flex items-center h-full">
-            <img :src="internetImg" class="invert" style="height:2rem;width:auto;" />
+            <img :src="internetImg" alt="Internet connection icon" class="invert" style="height:2rem;width:auto;" />
           </span>
           <span class="flex items-center h-full">
-            <img :src="lowBatteryImg" class="invert" style="height:2rem;width:auto;" />
+            <img :src="lowBatteryImg" alt="Low battery icon" class="invert" style="height:2rem;width:auto;" />
           </span>
         </div>
       </div>
@@ -25,7 +25,7 @@
       </div>
       <!-- Lock -->
       <ul v-if="showUnlock" id="unlockbutton" class="locking buttons absolute left-0 right-0" style="bottom: 40%;">
-        <li><a href="#" class="button n01" @click.prevent="unlockPhone">Tap to Unlock</a></li>
+        <li><button href="#" class="button n01" @click="unlockPhone">Tap to Unlock</button></li>
       </ul>
 
       <!-- Home Screen (split out as a component) -->
@@ -38,7 +38,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import signalStatusImg from '@/assets/signal-status.png'
 import internetImg from '@/assets/internet.png'
 import lowBatteryImg from '@/assets/low-battery.png'
@@ -83,11 +83,17 @@ const updateTime = () => {
   })
 }
 
+let intervalId
 onMounted(() => {
   setTimeout(() => {
     pageLoaded.value = true
   }, 10)
   updateTime()
-  setInterval(updateTime, 1000)
+  intervalId = setInterval(updateTime, 1000)
+})
+onUnmounted(() => {
+  if (intervalId) {
+    clearInterval(intervalId)
+  }
 })
 </script>
