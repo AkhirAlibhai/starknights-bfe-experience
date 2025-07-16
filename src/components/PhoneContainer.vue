@@ -32,48 +32,48 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
-import signalStatusImg from '@/assets/signal-status.png'
-import internetImg from '@/assets/internet.png'
-import lowBatteryImg from '@/assets/low-battery.png'
+import { onMounted, onUnmounted, ref } from "vue";
+import internetImg from "@/assets/internet.png";
+import lowBatteryImg from "@/assets/low-battery.png";
+import signalStatusImg from "@/assets/signal-status.png";
 
-const pageLoaded = ref(false)
-const showTime = ref(true)
-const showUnlock = ref(true)
+const pageLoaded = ref(false);
+const showTime = ref(true);
+const showUnlock = ref(true);
 
 const unlockPhone = () => {
-  showTime.value = false
-  showUnlock.value = false
-}
+	showTime.value = false;
+	showUnlock.value = false;
+};
 
-const formattedDate = ref('')
-const formattedTime = ref('')
+const formattedDate = ref("");
+const formattedTime = ref("");
 
 const updateTime = () => {
-  const now = new Date()
-  formattedDate.value = now.toLocaleDateString('en-US', {
-    weekday: 'long',
-    month: 'long',
-    day: 'numeric',
-  })
-  formattedTime.value = now.toLocaleTimeString([], {
-    hour: '2-digit',
-    minute: '2-digit',
-    hour12: false,
-  })
-}
+	const now = new Date();
+	formattedDate.value = now.toLocaleDateString("en-US", {
+		weekday: "long",
+		month: "long",
+		day: "numeric",
+	});
+	formattedTime.value = now.toLocaleTimeString([], {
+		hour: "2-digit",
+		minute: "2-digit",
+		hour12: false,
+	});
+};
 
-let intervalId
+let intervalId;
 onMounted(() => {
-  setTimeout(() => {
-    pageLoaded.value = true
-  }, 10)
-  updateTime()
-  intervalId = setInterval(updateTime, 1000)
-})
+	setTimeout(() => {
+		pageLoaded.value = true;
+	}, 10);
+	updateTime();
+	intervalId = setInterval(updateTime, 1000);
+});
 onUnmounted(() => {
-  if (intervalId) {
-    clearInterval(intervalId)
-  }
-})
+	if (intervalId) {
+		clearInterval(intervalId);
+	}
+});
 </script>

@@ -1,5 +1,5 @@
 export default {
-    async fetch(request, env, ctx) {
-        return new Response('Hello World!');
-    },
+	async fetch(_request, _env, _ctx) {
+		return new Response("Hello World!");
+	},
 } satisfies ExportedHandler<Env>;
