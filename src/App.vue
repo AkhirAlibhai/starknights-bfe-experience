@@ -1,8 +1,9 @@
-
-<script setup lang="ts">
-import PhoneContainer from './components/PhoneContainer.vue'
-</script>
-
 <template>
-  <PhoneContainer />
+  <RouterView></RouterView>
 </template>
+
+<style>
+html,body {
+  overflow: hidden;
+}
+</style>
