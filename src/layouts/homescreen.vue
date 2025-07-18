@@ -9,7 +9,7 @@ import WiFiIcon from "~icons/material-symbols/signal-wifi-4-bar";
 <template>
   <VApp>
     <RouterView #="{ Component }">
-      <VSystemBar window height="40" style="background-color: transparent;">
+      <VSystemBar window style="background-color: transparent;">
         <span>PhaseTel</span>
         <VSpacer></VSpacer>
         <VIcon :icon="WiFiIcon"></VIcon>

@@ -10,7 +10,7 @@ const randDate = ref(dateUtils.format(new Date(), "fullDateTime24h"));
     <VContainer fluid>
       <VRow>
         <VCol>
-          <VTextField single-line clearable persistent-clear density="comfortable" rounded bg-color="#ffffff"
+          <VTextField single-line clearable persistent-clear density="compact" rounded bg-color="#ffffff"
             variant="solo" hide-details placeholder="Number or contact name" prepend-inner-icon="$search"
             label="Search"></VTextField>
         </VCol>
