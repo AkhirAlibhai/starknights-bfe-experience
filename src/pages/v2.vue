@@ -35,7 +35,7 @@ const theme = useTheme();
           </RouterLink>
         </VCol>
         <VCol :cols="mdAndUp ? 1 : 3">
-          <RouterLink to="/jannual" style="color: inherit;"
+          <RouterLink to="#" style="color: inherit;"
             class="d-flex flex-column align-center text-center text-decoration-none">
             <VIcon :icon="GalleryIcon" size="64" color="#ffffff"
               style="background-color: blue;border-radius: 1rem;padding: 0.5rem;">
@@ -44,7 +44,7 @@ const theme = useTheme();
           </RouterLink>
         </VCol>
         <VCol :cols="mdAndUp ? 1 : 3">
-          <RouterLink to="/jannual" style="color: inherit;"
+          <RouterLink to="#" style="color: inherit;"
             class="d-flex flex-column align-center text-center text-decoration-none">
             <VBadge content="2" color="#ff0000">
               <VIcon :icon="JannualIcon" size="64" color="#ffffff"
