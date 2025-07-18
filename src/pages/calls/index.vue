@@ -2,7 +2,7 @@
 import { useDate, useTheme } from "vuetify";
 
 const dateUtils = useDate();
-const randDate = ref(dateUtils.format(new Date(), "fullDateTime24h"))
+const randDate = ref(dateUtils.format(new Date(), "fullDateTime24h"));
 </script>
 
 <template>

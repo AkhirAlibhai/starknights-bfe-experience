@@ -12,7 +12,7 @@ import PhoneIcon from "~icons/material-symbols/phone-enabled";
 import { useDisplay, useTheme } from "vuetify";
 
 const { mdAndUp } = useDisplay();
-const theme = useTheme()
+const theme = useTheme();
 </script>
 
 <route>
