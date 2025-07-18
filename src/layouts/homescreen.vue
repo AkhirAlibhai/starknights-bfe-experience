@@ -10,11 +10,11 @@ import WiFiIcon from "~icons/material-symbols/signal-wifi-4-bar";
   <VApp>
     <RouterView #="{ Component }">
       <VSystemBar window height="40" style="background-color: transparent;">
-        <span class="text-h5">PhaseTel</span>
+        <span>PhaseTel</span>
         <VSpacer></VSpacer>
-        <VIcon :icon="WiFiIcon" size="2rem"></VIcon>
-        <VIcon :icon="CellIcon" size="2rem" class="ms-2"></VIcon>
-        <VIcon :icon="BatteryIcon" size="2rem" class="ms-2"></VIcon>
+        <VIcon :icon="WiFiIcon"></VIcon>
+        <VIcon :icon="CellIcon" class="ms-2"></VIcon>
+        <VIcon :icon="BatteryIcon" class="ms-2"></VIcon>
       </VSystemBar>
 
       <component :is="Component"></component>
