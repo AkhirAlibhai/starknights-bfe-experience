@@ -17,7 +17,12 @@ const randDate = ref(dateUtils.format(new Date(), "fullDateTime24h"));
       </VRow>
       <VRow>
         <VCol>
-          <VList density="comfortable">
+          <VLabel>Call Logs</VLabel>
+        </VCol>
+      </VRow>
+      <VRow>
+        <VCol>
+          <VList density="comfortable" rounded="xl">
             <VListItem to="/calls/someid" prepend-avatar="https://i.pravatar.cc/300?u=001" title="long ass starknights name. idk why" :subtitle="randDate">
               <template #append>
                 <VIcon icon="$voicemail" color="success"></VIcon>
@@ -61,6 +66,36 @@ const randDate = ref(dateUtils.format(new Date(), "fullDateTime24h"));
               </template>
             </VListItem>
             <VListItem prepend-avatar="https://i.pravatar.cc/300?u=008" title="Starknight #008" :subtitle="randDate">
+              <template #append>
+                <VIcon icon="$voicemail"></VIcon>
+                <VIcon icon="$callMissed" color="error" class="ms-2"></VIcon>
+              </template>
+            </VListItem>
+            <VListItem prepend-avatar="https://i.pravatar.cc/300?u=009" title="Starknight #009" :subtitle="randDate">
+              <template #append>
+                <VIcon icon="$voicemail"></VIcon>
+                <VIcon icon="$callMissed" color="error" class="ms-2"></VIcon>
+              </template>
+            </VListItem>
+            <VListItem prepend-avatar="https://i.pravatar.cc/300?u=010" title="Starknight #010" :subtitle="randDate">
+              <template #append>
+                <VIcon icon="$voicemail"></VIcon>
+                <VIcon icon="$callMissed" color="error" class="ms-2"></VIcon>
+              </template>
+            </VListItem>
+            <VListItem prepend-avatar="https://i.pravatar.cc/300?u=011" title="Starknight #011" :subtitle="randDate">
+              <template #append>
+                <VIcon icon="$voicemail"></VIcon>
+                <VIcon icon="$callMissed" color="error" class="ms-2"></VIcon>
+              </template>
+            </VListItem>
+            <VListItem prepend-avatar="https://i.pravatar.cc/300?u=012" title="Starknight #012" :subtitle="randDate">
+              <template #append>
+                <VIcon icon="$voicemail"></VIcon>
+                <VIcon icon="$callMissed" color="error" class="ms-2"></VIcon>
+              </template>
+            </VListItem>
+            <VListItem prepend-avatar="https://i.pravatar.cc/300?u=013" title="Starknight #008" :subtitle="randDate">
               <template #append>
                 <VIcon icon="$voicemail"></VIcon>
                 <VIcon icon="$callMissed" color="error" class="ms-2"></VIcon>

@@ -12,7 +12,7 @@ const defaultOpened = ref(0);
 <template>
   <VApp>
     <RouterView #="{ Component }">
-      <VSystemBar window height="40" style="background-color: transparent;">
+      <VSystemBar window>
         <span>PhaseTel</span>
         <VSpacer></VSpacer>
         <VIcon :icon="WiFiIcon"></VIcon>
@@ -21,14 +21,9 @@ const defaultOpened = ref(0);
       </VSystemBar>
       <component :is="Component"></component>
       <VBottomNavigation grow>
-        <VBtn icon="$menu"></VBtn>
         <VDialog max-width="500px">
           <template #activator="{ props }">
-            <VBtn v-bind="props">
-              <VIcon size="32">
-                <VImg :src="Jorb"></VImg>
-              </VIcon>
-            </VBtn>
+            <VBtn icon="$menu" v-bind="props"></VBtn>
           </template>
           <VCard title="About">
             <VCardText>
@@ -52,6 +47,11 @@ const defaultOpened = ref(0);
             </VCardText>
           </VCard>
         </VDialog>
+        <VBtn to="/v2">
+          <VIcon size="32">
+            <VImg :src="Jorb"></VImg>
+          </VIcon>
+        </VBtn>
         <VBtn icon="$prev" @click="$router.back()"></VBtn>
       </VBottomNavigation>
     </RouterView>
