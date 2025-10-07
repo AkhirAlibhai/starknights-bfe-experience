@@ -1,10 +1,8 @@
 <script setup lang="ts">
 import { useDate } from "vuetify";
-import Sample from "@/assets/sample.wav";
 import callData from "@/data/calls.json";
 
 const dateUtils = useDate();
-const randDate = ref(dateUtils.format(new Date(), "fullDateTime24h"));
 const opened = ref<number[]>([]);
 
 const container = useTemplateRef("audioContainer");
@@ -83,7 +81,7 @@ const callLogs = ref<CallLog[]>(readCallsConfig());
               </template>
               <VCard>
                 <VCardText>
-                  <audio ref="audioContainer" :src="log.audio || Sample" />
+                  <audio ref="audioContainer" :src="log.audio" />
                   <VRow>
                     <VCol cols="12">
                       <VSlider min="0" :max="audio.duration.value" v-model="audio.currentTime.value" hide-details
