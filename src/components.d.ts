@@ -11,5 +11,6 @@ declare module 'vue' {
     PhoneContainer: typeof import('./components/PhoneContainer.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    StatusBar: typeof import('./components/StatusBar.vue')['default']
   }
 }
