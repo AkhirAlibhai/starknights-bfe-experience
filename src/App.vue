@@ -1,9 +1,12 @@
-<template>
-  <RouterView></RouterView>
-</template>
+<script setup>
+import { useRoute } from 'vue-router'
+import PhoneContainer from '@/components/PhoneContainer.vue'
 
-<style>
-html,body {
-  overflow: hidden;
-}
-</style>
+const route = useRoute()
+</script>
+
+<template>
+  <PhoneContainer :blur="route.meta.blur">
+    <RouterView />
+  </PhoneContainer>
+</template>
