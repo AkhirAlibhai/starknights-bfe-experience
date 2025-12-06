@@ -19,7 +19,7 @@
 
 <script setup>
 import { onMounted, onUnmounted, ref } from "vue";
-import StatusBar from "./StatusBar.vue";
+import StatusBar from "./status-bar/StatusBar.vue";
 
 const pageLoaded = ref(false);
 const showTime = ref(true);
