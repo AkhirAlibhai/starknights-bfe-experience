@@ -15,10 +15,12 @@ function openApp() {
 </script>
 
 <template>
-  <div class="flex flex-col items-center cursor-pointer" @click="openApp">
-    <VAvatar size="64">
-      <VIcon :icon="app.icon" size="40" />
-    </VAvatar>
+  <div @click="openApp" style="color: inherit; cursor: pointer;"
+    class="d-flex flex-column align-center text-center text-decoration-none">
+    <VBadge :content="app.badge" :model-value="app.badge ? app.badge > 0 : false" color="#ff0000">
+      <VIcon :icon="app.icon" size="64"
+        :style="{ backgroundColor: app.backgroundColor, borderRadius: '1rem', padding: '0.5rem' }" />
+    </VBadge>
     <div class="mt-2 text-sm text-white">{{ app.name }}</div>
   </div>
 </template>

@@ -6,6 +6,8 @@ export const apps: AppDefinition[] = [
     id: "calls",
     name: "Jhone",
     icon: PhoneIcon,
-    route: "/calls"
+    route: "/calls",
+    backgroundColor: "limegreen",
+    badge: 3,
   },
 ];
