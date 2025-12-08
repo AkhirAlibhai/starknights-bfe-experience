@@ -8,8 +8,12 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    AppIcon: typeof import('./components/AppIcon.vue')['default']
+    LockScreen: typeof import('./components/screens/LockScreen.vue')['default']
     PhoneContainer: typeof import('./components/PhoneContainer.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    StatusBar: typeof import('./components/status-bar/StatusBar.vue')['default']
+    StatusIcon: typeof import('./components/status-bar/StatusIcon.vue')['default']
   }
 }

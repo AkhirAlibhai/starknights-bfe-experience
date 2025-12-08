@@ -20,6 +20,10 @@ export default defineConfig({
 	plugins: [
 		VueRouter({
 			dts: "src/typed-router.d.ts",
+			routesFolder: "src/pages",
+			routeBlockLang: "json",
+			extensions: [".vue"],
+			importMode: "async",
 		}),
 		Layouts(),
 		AutoImport({

@@ -1,3 +1,10 @@
+<route lang="json">{
+  "meta": {
+    "layout": "unlocked",
+    "blur": false
+  }
+}</route>
+
 <script setup lang="ts">
 import { useDate } from "vuetify";
 import callData from "@/data/calls.json";
