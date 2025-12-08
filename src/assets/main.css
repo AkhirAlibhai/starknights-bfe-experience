@@ -1,96 +1,110 @@
 #root {
-	background-color: #212429;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	min-height: 100vh;
+  background-color: #212429;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
 }
 
 #phonecontainer {
-	opacity: 0;
-	filter: blur(12px);
-	transition:
-		opacity 2s ease,
-		filter 2s ease;
-	height: 100vh;
+  opacity: 0;
+  filter: blur(12px);
+  transition:
+    opacity 2s ease,
+    filter 2s ease;
+  height: 100vh;
 }
 
 #phonecontainer.page-loaded {
-	opacity: 1;
-	filter: blur(0);
+  opacity: 1;
+  filter: blur(0);
 }
 
 .invert {
-	filter: invert(1);
+  filter: invert(1);
 }
 
 .hide-scrollbar::-webkit-scrollbar {
-	display: none;
+  display: none;
 }
 
 .hide-scrollbar {
-	-ms-overflow-style: none;
-	scrollbar-width: none;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .status-bar {
-	height: 1.5rem;
-	min-height: 1.5rem;
-	max-height: 1.5rem;
-	display: flex;
-	align-items: center;
+  height: 1.5rem;
+  min-height: 1.5rem;
+  max-height: 1.5rem;
+  display: flex;
+  align-items: center;
 }
 
 .locking {
-	text-align: center;
-	color: #ffffff;
-	font-family: "League Spartan", sans-serif;
-	line-height: 1.5;
-	font-weight: 600;
-	text-shadow: 0.088rem 0.088rem 0.125rem #0a0b0d;
+  text-align: center;
+  color: #ffffff;
+  font-family: "League Spartan", sans-serif;
+  line-height: 1.5;
+  font-weight: 600;
+  text-shadow: 0.088rem 0.088rem 0.125rem #0a0b0d;
 }
 
 .time {
-	font-size: 6.375em;
-	margin-top: -0.25em;
+  font-size: 6.375em;
+  margin-top: -0.25em;
 }
 
 .button {
-	cursor: default;
-	display: flex;
-	justify-content: var(--flex-alignment);
-	letter-spacing: 0;
-	padding: 0;
+  cursor: default;
+  display: flex;
+  justify-content: var(--flex-alignment);
+  letter-spacing: 0;
+  padding: 0;
 }
 
 #unlockbutton button {
-	display: inline-block;
-	align-items: center;
-	line-height: calc(5rem - 4px);
-	padding: 0 2.5rem;
-	vertical-align: middle;
-	font-family: "League Spartan", sans-serif;
-	letter-spacing: 0.05rem;
-	padding-left: calc(0.05rem + 2.5rem);
-	font-size: 2.25em;
-	font-weight: 500;
-	border-radius: 0rem;
-	direction: var(--site-language-direction);
-	overflow: hidden;
-	text-overflow: ellipsis;
-	transition:
-		color 1.5s ease,
-		background-color 1.5s ease,
-		border-color 1.5s ease;
-	list-style-type: none;
+  display: inline-block;
+  align-items: center;
+  line-height: calc(5rem - 4px);
+  padding: 0 2.5rem;
+  vertical-align: middle;
+  font-family: "League Spartan", sans-serif;
+  letter-spacing: 0.05rem;
+  padding-left: calc(0.05rem + 2.5rem);
+  font-size: 2.25em;
+  font-weight: 500;
+  border-radius: 0rem;
+  direction: var(--site-language-direction);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition:
+    color 1.5s ease,
+    background-color 1.5s ease,
+    border-color 1.5s ease;
+  list-style-type: none;
 }
 
 #unlockbutton .button {
-	color: #373b40;
-	border: solid 2px transparent;
+  color: #373b40;
+  border: solid 2px transparent;
 }
 
 #unlockbutton .n01:hover {
-	border-color: transparent !important;
-	color: transparent !important;
+  border-color: transparent !important;
+  color: transparent !important;
+}
+
+.phone-blur {
+  backdrop-filter: blur(12px);
+  transition: backdrop-filter 0.35s ease;
+}
+
+:not(.phone-blur) {
+  transition: none !important;
+}
+
+.phone-scroll {
+  width: 100%;
+  -webkit-overflow-scrolling: touch;
 }
