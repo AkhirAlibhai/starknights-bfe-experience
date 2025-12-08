@@ -3,7 +3,7 @@
     "layout": "unlocked",
     "blur": false
   }
-}</route>
+}</route>;
 
 <script setup lang="ts">
 import { apps } from "@/apps/registry";
