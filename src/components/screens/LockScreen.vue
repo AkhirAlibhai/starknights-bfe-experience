@@ -64,7 +64,3 @@ const emitUnlock = () => {
   emit("unlock");
 };
 </script>
-
-<style scoped>
-/* styles remain the same or can be moved from PhoneContainer */
-</style>

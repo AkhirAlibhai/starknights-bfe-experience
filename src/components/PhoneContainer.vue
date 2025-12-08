@@ -37,7 +37,6 @@ onMounted(() => {
   transition: backdrop-filter 0.35s ease;
 }
 
-/* explicit no-transition when blur class not present */
 :not(.phone-blur) {
   transition: none !important;
 }
