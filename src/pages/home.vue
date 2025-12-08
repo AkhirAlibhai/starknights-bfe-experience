@@ -1,6 +1,6 @@
 <route lang="json">{
   "meta": {
-    "layout": "blank",
+    "layout": "unlocked",
     "blur": false
   }
 }</route>

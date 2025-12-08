@@ -15,12 +15,14 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div v-if="ready">
-    <PhoneContainer :meta-ready="ready" :blur="route.meta?.blur">
-      <RouterView />
-    </PhoneContainer>
-  </div>
+  <VApp>
+    <div v-if="ready">
+      <PhoneContainer :meta-ready="ready" :blur="route.meta?.blur">
+        <RouterView />
+      </PhoneContainer>
+    </div>
 
-  <div v-else style="width:100vw;height:100vh;display:flex;align-items:center;justify-content:center;">
-  </div>
+    <div v-else style="width:100vw;height:100vh;display:flex;align-items:center;justify-content:center;">
+    </div>
+  </VApp>
 </template>
