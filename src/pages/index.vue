@@ -3,9 +3,9 @@
     "layout": "blank",
     "blur": true
   }
-}</route>
+}</route>;
 
-<script setup>
+<script setup lang="ts">
 import { useRouter } from 'vue-router'
 import LockScreen from '@/components/screens/LockScreen.vue'
 
