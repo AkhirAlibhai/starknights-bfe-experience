@@ -33,3 +33,19 @@ onMounted(() => {
     </div>
   </div>
 </template>
+
+<style scoped>
+.phone-blur {
+  backdrop-filter: blur(12px);
+  transition: backdrop-filter 0.35s ease;
+}
+
+:not(.phone-blur) {
+  transition: none !important;
+}
+
+.phone-scroll {
+  width: 100%;
+  -webkit-overflow-scrolling: touch;
+}
+</style>
