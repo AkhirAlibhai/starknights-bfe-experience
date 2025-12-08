@@ -1,12 +1,10 @@
 <template>
   <div class="lock-screen">
-    <!-- Clock & Date -->
     <div v-if="showTime" id="timedisplay" class="relative text-center mt-32">
       <p class="locking">{{ formattedDate }}</p>
       <p class="locking time">{{ formattedTime }}</p>
     </div>
 
-    <!-- Unlock button -->
     <ul
       v-if="showUnlock"
       id="unlockbutton"
