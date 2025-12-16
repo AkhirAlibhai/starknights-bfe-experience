@@ -1,3 +1,10 @@
+<route lang="json">{
+  "meta": {
+    "layout": "unlocked",
+    "blur": false
+  }
+}</route>
+
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
@@ -39,6 +46,22 @@ watch(
     }
   },
 )
+
+watch(
+  () => route.params.id,
+  () => {
+    dialTone.stop()
+    dialFailTone.stop()
+    dialing.value = false
+    dialTonePlayback.value = 0
+    dialFail.value = false
+  }
+)
+
+onUnmounted(() => {
+  dialTone.stop()
+  dialFailTone.stop()
+})
 </script>
 
 

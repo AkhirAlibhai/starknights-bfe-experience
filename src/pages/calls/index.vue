@@ -46,16 +46,20 @@ function initializeAudio(log: CallDefinition) {
       audioStates.value[log.id].playing = true;
 
       if (lastPlayed !== -1 && lastPlayed !== log.id) {
-        const lastAudio = audioRefs.value[lastPlayed];
-        if (lastAudio && !lastAudio.paused) {
-          lastAudio.pause();
-        }
+        pauseAudio(lastPlayed);
       }
       lastPlayed = log.id;
     });
     audioElement.addEventListener("pause", () => {
       audioStates.value[log.id].playing = false;
     });
+  }
+}
+
+function pauseAudio(logId: number) {
+  const audio = audioRefs.value[logId];
+  if (audio) {
+    audio.pause();
   }
 }
 
@@ -76,6 +80,10 @@ function updateCurrentTime(logId: number, value: number) {
     audio.currentTime = value; // Update the currentTime of the audio element
   }
 }
+
+onUnmounted(() => {
+  pauseAudio(lastPlayed);
+})
 </script>
 
 <template>
@@ -146,7 +154,8 @@ function updateCurrentTime(logId: number, value: number) {
                   <VRow>
                     <VList density="comfortable">
                       <VListItem prepend-icon="$call" title="Voice Call" :to="`/calls/${log.id}`"></VListItem>
-                      <VListItem prepend-icon="$vidcall" title="Video Call" :to="`/calls/${log.id}?video=true`"></VListItem>
+                      <VListItem prepend-icon="$vidcall" title="Video Call" :to="`/calls/${log.id}?video=true`">
+                      </VListItem>
                       <VListItem prepend-icon="$text" title="Send a Message" disabled></VListItem>
                     </VList>
                   </VRow>
