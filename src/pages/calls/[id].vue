@@ -28,6 +28,14 @@ const dialing = ref(false)
 const dialTonePlayback = ref(0)
 const dialFail = ref(false)
 
+function hangUp() {
+  dialing.value = false
+  dialTone.stop()
+  dialFailTone.stop()
+  dialTonePlayback.value = 0
+  dialFail.value = false
+}
+
 watch(
   [
     dialTone.isPlaying,
@@ -82,13 +90,8 @@ onUnmounted(() => {
 
       <template v-if="dialing">
         <VRow>
-          <VCol cols="12">
-            <VLabel>Dialing...</VLabel>
-          </VCol>
-        </VRow>
-        <VRow>
           <VCol cols="3">
-            <VBtn icon="$call" color="error"></VBtn>
+            <VBtn icon="$call" color="error" @click="hangUp"></VBtn>
           </VCol>
           <VCol cols="3">
             <VBtn icon="$speaker"></VBtn>
@@ -102,10 +105,8 @@ onUnmounted(() => {
         </VRow>
       </template>
 
-      <VRow v-else>
-        <VCol cols="3">
-          <VBtn icon="$call" color="success" @click="dialing = true" />
-        </VCol>
+      <VRow justify="center" v-else>
+        <VBtn icon="$call" color="success" @click="dialing = true" />
       </VRow>
     </VContainer>
   </VMain>
