@@ -10,7 +10,6 @@ import { computed, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { useSound } from "@vueuse/sound"
 
-import Dialing from "@/assets/tone_dial.wav"
 import DialingFail from "@/assets/tone_fail.wav"
 import { callLog } from '@/calls/registry'
 
@@ -24,8 +23,8 @@ const selectedCall = computed(() => {
   return callLog[id.value]
 })
 
-const dialTone = useSound(Dialing)
 const dialFailTone = useSound(DialingFail)
+const callAudio = new Audio(selectedCall.value?.audio || "")
 
 const dialing = ref(false)
 const dialTonePlayback = ref(0)
@@ -33,7 +32,7 @@ const dialFail = ref(false)
 
 function hangUp() {
   dialing.value = false
-  dialTone.stop()
+  callAudio.pause()
   dialFailTone.stop()
   dialTonePlayback.value = 0
   dialFail.value = false
@@ -41,17 +40,17 @@ function hangUp() {
 
 watch(
   [
-    dialTone.isPlaying,
+    // dialTone.isPlaying,
     dialFailTone.isPlaying,
     dialing,
     dialFail,
     dialTonePlayback,
+    callAudio.currentTime,
   ],
-  ([playDial, playFail, dialing, fail, n]) => {
-    if (dialing && !playDial && n < 4) {
-      dialTone.play()
-      dialTonePlayback.value = n + 1
-      dialFail.value = n + 1 >= 4
+  ([playDial, playFail, dialing, fail, currentTime]) => {
+    console.log("Watch triggered:", { playDial, playFail, dialing, fail, currentTime });
+    callAudio.play()
+    if (dialing && !playDial) {
     } else if (fail && !playFail && !playDial) {
       dialFailTone.play()
     }
@@ -59,9 +58,9 @@ watch(
 )
 
 watch(
-  () => route.params.id,
+  () => id,
   () => {
-    dialTone.stop()
+    callAudio.pause()
     dialFailTone.stop()
     dialing.value = false
     dialTonePlayback.value = 0
@@ -70,7 +69,7 @@ watch(
 )
 
 onUnmounted(() => {
-  dialTone.stop()
+  callAudio.pause()
   dialFailTone.stop()
 })
 </script>
