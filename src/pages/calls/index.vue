@@ -6,10 +6,9 @@
 }</route>
 
 <script setup lang="ts">
-import { useDate } from "vuetify";
-import callData from "@/data/calls.json";
+import { type CallDefinition } from '@/calls/call';
+import { callLog } from '@/calls/registry';
 
-const dateUtils = useDate();
 const opened = ref<number[]>([]);
 
 const audioRefs = ref<Record<number, HTMLAudioElement>>({});
@@ -23,36 +22,8 @@ const displayTime = (time: number) => {
   return `${min.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
 };
 
-interface CallLog {
-  id: number
-  avatar: string
-  title: string
-  missed: boolean
-  voicemail: boolean
-  timestamp: string
-  audio: string
-  date: string
-}
 
-function readCallsConfig(): CallLog[] {
-  return (callData as CallLog[]).map((c, i) => {
-    const id = c.id || `call-${i}`;
-    return {
-      id,
-      avatar: c.avatar,
-      title: c.title,
-      missed: !!c.missed,
-      voicemail: !!c.voicemail,
-      timestamp: c.timestamp,
-      audio: c.audio,
-      date: dateUtils.format(new Date(c.timestamp), "fullDateTime24h")
-    } as CallLog;
-  });
-}
-
-const callLogs = ref<CallLog[]>(readCallsConfig());
-
-function initializeAudio(log: CallLog) {
+function initializeAudio(log: CallDefinition) {
   if (!audioRefs.value[log.id]) {
     const audioElement = new Audio(log.audio);
     audioRefs.value[log.id] = audioElement;
@@ -124,7 +95,7 @@ function updateCurrentTime(logId: number, value: number) {
       <VRow>
         <VCol>
           <VList density="comfortable" rounded="xl" open-strategy="single" v-model:opened="opened">
-            <VListGroup v-for="log in callLogs" :key="log.id" :value="log.id" @click="initializeAudio(log)">
+            <VListGroup v-for="log in callLog" :key="log.id" :value="log.id" @click="initializeAudio(log)">
               <template #activator="{ props }">
                 <VListItem :prepend-avatar="log.avatar" :title="log.title" v-bind="props">
                   <template #subtitle>
