@@ -27,35 +27,19 @@ const dialFailTone = useSound(DialingFail)
 const callAudio = new Audio(selectedCall.value?.audio || "")
 
 const dialing = ref(false)
-const dialTonePlayback = ref(0)
-const dialFail = ref(false)
+
+function pickUp() {
+  dialing.value = true
+  callAudio.play()
+}
 
 function hangUp() {
   dialing.value = false
   callAudio.pause()
-  dialFailTone.stop()
-  dialTonePlayback.value = 0
-  dialFail.value = false
+  callAudio.currentTime = 0
+  dialFailTone.play()
 }
 
-watch(
-  [
-    // dialTone.isPlaying,
-    dialFailTone.isPlaying,
-    dialing,
-    dialFail,
-    dialTonePlayback,
-    callAudio.currentTime,
-  ],
-  ([playDial, playFail, dialing, fail, currentTime]) => {
-    console.log("Watch triggered:", { playDial, playFail, dialing, fail, currentTime });
-    callAudio.play()
-    if (dialing && !playDial) {
-    } else if (fail && !playFail && !playDial) {
-      dialFailTone.play()
-    }
-  },
-)
 
 watch(
   () => id,
@@ -63,8 +47,6 @@ watch(
     callAudio.pause()
     dialFailTone.stop()
     dialing.value = false
-    dialTonePlayback.value = 0
-    dialFail.value = false
   }
 )
 
@@ -108,7 +90,7 @@ onUnmounted(() => {
       </template>
 
       <VRow justify="center" v-else>
-        <VBtn icon="$call" color="success" @click="dialing = true" />
+        <VBtn icon="$call" color="success" @click="pickUp" />
       </VRow>
     </VContainer>
   </VMain>
