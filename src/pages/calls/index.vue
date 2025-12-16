@@ -145,8 +145,8 @@ function updateCurrentTime(logId: number, value: number) {
                   </VRow>
                   <VRow>
                     <VList density="comfortable">
-                      <VListItem prepend-icon="$call" title="Voice Call" to="/calls/001"></VListItem>
-                      <VListItem prepend-icon="$vidcall" title="Video Call" to="/calls/001?video=true"></VListItem>
+                      <VListItem prepend-icon="$call" title="Voice Call" :to="`/calls/${log.id}`"></VListItem>
+                      <VListItem prepend-icon="$vidcall" title="Video Call" :to="`/calls/${log.id}?video=true`"></VListItem>
                       <VListItem prepend-icon="$text" title="Send a Message" disabled></VListItem>
                     </VList>
                   </VRow>
