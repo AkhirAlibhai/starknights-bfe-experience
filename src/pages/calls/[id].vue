@@ -15,7 +15,10 @@ import DialingFail from "@/assets/tone_fail.wav"
 import { callLog } from '@/calls/registry'
 
 const route = useRoute()
-const id = computed(() => Number(route.params.id))
+const id = computed(() => {
+  const params = route.params as { id: string }
+  return Number(params.id)
+})
 
 const selectedCall = computed(() => {
   return callLog[id.value]
