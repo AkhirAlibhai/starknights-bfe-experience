@@ -1,57 +1,87 @@
+<route lang="json">{
+  "meta": {
+    "layout": "unlocked",
+    "blur": false
+  }
+}</route>
+
 <script setup lang="ts">
-import { useSound } from "@vueuse/sound";
-import Dialing from "@/assets/tone_dial.wav";
-import DialingFail from "@/assets/tone_fail.wav";
+import { computed, ref, watch } from 'vue'
+import { useRoute } from 'vue-router'
+import { useSound } from "@vueuse/sound"
 
-const dialTone = useSound(Dialing);
-const dialFailTone = useSound(DialingFail);
+import DialingFail from "@/assets/tone_fail.wav"
+import { callLog } from '@/calls/registry'
 
-const dialing = ref(false);
-const dialTonePlayback = ref(0);
-const dialFail = ref(false);
+const route = useRoute()
+const id = computed(() => {
+  const params = route.params as { id: string }
+  return Number(params.id)
+})
+
+const selectedCall = computed(() => {
+  return callLog[id.value]
+})
+
+const dialFailTone = useSound(DialingFail)
+const callAudio = new Audio(selectedCall.value?.audio || "")
+
+const dialing = ref(false)
+
+function pickUp() {
+  dialing.value = true
+  callAudio.play()
+}
+
+function hangUp() {
+  dialing.value = false
+  callAudio.pause()
+  callAudio.currentTime = 0
+  dialFailTone.play()
+}
+
+callAudio.addEventListener("timeupdate", () => {
+  if (callAudio.ended) {
+    hangUp()
+  }
+});
+
 
 watch(
-	[
-		dialTone.isPlaying,
-		dialFailTone.isPlaying,
-		dialing,
-		dialFail,
-		dialTonePlayback,
-	],
-	([playDial, playFail, dialing, fail, n]) => {
-		if (dialing && !playDial && n < 4) {
-			dialTone.play();
-			dialTonePlayback.value = n + 1;
-			dialFail.value = n + 1 >= 4;
-		} else if (fail && !playFail && !playDial) {
-			dialFailTone.play();
-		}
-	},
-);
+  () => id,
+  () => {
+    callAudio.pause()
+    dialFailTone.stop()
+    dialing.value = false
+  }
+)
+
+onUnmounted(() => {
+  callAudio.pause()
+  dialFailTone.stop()
+})
 </script>
 
+
 <template>
-  <VMain>
+  <VMain v-if="selectedCall">
     <VContainer fluid class="text-center">
       <VRow>
         <VCol cols="12">
-          <VAvatar image="https://i.pravatar.cc/300?u=001" size="256"></VAvatar>
+          <VAvatar :image="selectedCall.avatar" size="256" />
         </VCol>
       </VRow>
+
       <VRow>
         <VCol cols="12">
-          <span class="text-h6">long ass starknights name. idk why</span>
+          <span class="text-h6">{{ selectedCall.title }}</span>
         </VCol>
       </VRow>
+
       <template v-if="dialing">
         <VRow>
-          <VCol cols="12">
-            <VLabel>Dialing...</VLabel>
-          </VCol>
-        </VRow>
-        <VRow>
           <VCol cols="3">
-            <VBtn icon="$call" color="error"></VBtn>
+            <VBtn icon="$call" color="error" @click="hangUp"></VBtn>
           </VCol>
           <VCol cols="3">
             <VBtn icon="$speaker"></VBtn>
@@ -64,11 +94,14 @@ watch(
           </VCol>
         </VRow>
       </template>
-      <VRow v-else class="text-center">
-        <VCol cols="3">
-          <VBtn icon="$call" color="success" @click="dialing = true"></VBtn>
-        </VCol>
+
+      <VRow justify="center" v-else>
+        <VBtn icon="$call" color="success" @click="pickUp" />
       </VRow>
     </VContainer>
+  </VMain>
+
+  <VMain v-else>
+    <VContainer>Call not found</VContainer>
   </VMain>
 </template>

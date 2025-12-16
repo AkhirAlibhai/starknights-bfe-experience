@@ -6,10 +6,9 @@
 }</route>
 
 <script setup lang="ts">
-import { useDate } from "vuetify";
-import callData from "@/data/calls.json";
+import { type CallDefinition } from '@/calls/call';
+import { callLog } from '@/calls/registry';
 
-const dateUtils = useDate();
 const opened = ref<number[]>([]);
 
 const audioRefs = ref<Record<number, HTMLAudioElement>>({});
@@ -23,36 +22,8 @@ const displayTime = (time: number) => {
   return `${min.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
 };
 
-interface CallLog {
-  id: number
-  avatar: string
-  title: string
-  missed: boolean
-  voicemail: boolean
-  timestamp: string
-  audio: string
-  date: string
-}
 
-function readCallsConfig(): CallLog[] {
-  return (callData as CallLog[]).map((c, i) => {
-    const id = c.id || `call-${i}`;
-    return {
-      id,
-      avatar: c.avatar,
-      title: c.title,
-      missed: !!c.missed,
-      voicemail: !!c.voicemail,
-      timestamp: c.timestamp,
-      audio: c.audio,
-      date: dateUtils.format(new Date(c.timestamp), "fullDateTime24h")
-    } as CallLog;
-  });
-}
-
-const callLogs = ref<CallLog[]>(readCallsConfig());
-
-function initializeAudio(log: CallLog) {
+function initializeAudio(log: CallDefinition) {
   if (!audioRefs.value[log.id]) {
     const audioElement = new Audio(log.audio);
     audioRefs.value[log.id] = audioElement;
@@ -75,16 +46,20 @@ function initializeAudio(log: CallLog) {
       audioStates.value[log.id].playing = true;
 
       if (lastPlayed !== -1 && lastPlayed !== log.id) {
-        const lastAudio = audioRefs.value[lastPlayed];
-        if (lastAudio && !lastAudio.paused) {
-          lastAudio.pause();
-        }
+        pauseAudio(lastPlayed);
       }
       lastPlayed = log.id;
     });
     audioElement.addEventListener("pause", () => {
       audioStates.value[log.id].playing = false;
     });
+  }
+}
+
+function pauseAudio(logId: number) {
+  const audio = audioRefs.value[logId];
+  if (audio) {
+    audio.pause();
   }
 }
 
@@ -105,6 +80,10 @@ function updateCurrentTime(logId: number, value: number) {
     audio.currentTime = value; // Update the currentTime of the audio element
   }
 }
+
+onUnmounted(() => {
+  pauseAudio(lastPlayed);
+})
 </script>
 
 <template>
@@ -124,7 +103,7 @@ function updateCurrentTime(logId: number, value: number) {
       <VRow>
         <VCol>
           <VList density="comfortable" rounded="xl" open-strategy="single" v-model:opened="opened">
-            <VListGroup v-for="log in callLogs" :key="log.id" :value="log.id" @click="initializeAudio(log)">
+            <VListGroup v-for="log in callLog" :key="log.id" :value="log.id" @click="initializeAudio(log)">
               <template #activator="{ props }">
                 <VListItem :prepend-avatar="log.avatar" :title="log.title" v-bind="props">
                   <template #subtitle>
@@ -174,8 +153,9 @@ function updateCurrentTime(logId: number, value: number) {
                   </VRow>
                   <VRow>
                     <VList density="comfortable">
-                      <VListItem prepend-icon="$call" title="Voice Call" to="/calls/001"></VListItem>
-                      <VListItem prepend-icon="$vidcall" title="Video Call" to="/calls/001?video=true"></VListItem>
+                      <VListItem prepend-icon="$call" title="Voice Call" :to="`/calls/${log.id}`"></VListItem>
+                      <VListItem prepend-icon="$vidcall" title="Video Call" :to="`/calls/${log.id}?video=true`">
+                      </VListItem>
                       <VListItem prepend-icon="$text" title="Send a Message" disabled></VListItem>
                     </VList>
                   </VRow>
