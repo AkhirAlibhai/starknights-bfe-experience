@@ -15,6 +15,8 @@ const opened = ref<number[]>([]);
 const audioRefs = ref<Record<number, HTMLAudioElement>>({});
 const audioStates = ref<Record<number, { currentTime: number; duration: number; playing: boolean }>>({});
 
+let lastPlayed = -1;
+
 const displayTime = (time: number) => {
   const sec = Math.round(time % 60);
   const min = Math.floor(time / 60);
@@ -71,6 +73,14 @@ function initializeAudio(log: CallLog) {
 
     audioElement.addEventListener("play", () => {
       audioStates.value[log.id].playing = true;
+
+      if (lastPlayed !== -1 && lastPlayed !== log.id) {
+        const lastAudio = audioRefs.value[lastPlayed];
+        if (lastAudio && !lastAudio.paused) {
+          lastAudio.pause();
+        }
+      }
+      lastPlayed = log.id;
     });
     audioElement.addEventListener("pause", () => {
       audioStates.value[log.id].playing = false;
