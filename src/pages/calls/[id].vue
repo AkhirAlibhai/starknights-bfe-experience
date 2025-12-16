@@ -40,6 +40,12 @@ function hangUp() {
   dialFailTone.play()
 }
 
+callAudio.addEventListener("timeupdate", () => {
+  if (callAudio.ended) {
+    hangUp()
+  }
+});
+
 
 watch(
   () => id,
