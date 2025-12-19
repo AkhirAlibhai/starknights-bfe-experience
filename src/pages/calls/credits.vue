@@ -16,15 +16,10 @@ import { callLog } from '@/calls/registry';
     <VContainer fluid>
       <VRow>
         <VCol>
-          <VLabel>Credits</VLabel>
-        </VCol>
-      </VRow>
-      <VRow>
-        <VCol>
           <VList density="comfortable" rounded="xl" open-strategy="single">
             <VListGroup v-for="log in callLog">
               <template #activator="{ props }">
-                <VListItem :prepend-avatar="log.avatar" :title="log.title" v-bind="props"/>
+                <VListItem :prepend-avatar="log.avatar" :title="log.title" v-bind="props" />
               </template>
               <VCard>
                 <VCardText>

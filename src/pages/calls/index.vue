@@ -105,14 +105,13 @@ onUnmounted(() => {
       <VRow>
         <VCol>
           <VTextField v-model="search" single-line clearable persistent-clear density="compact" rounded
-            bg-color="#ffffff" variant="solo" hide-details placeholder="Search by Title"
-            prepend-inner-icon="$search" label="Search" />
+            bg-color="#ffffff" variant="solo" hide-details placeholder="Search by Title" prepend-inner-icon="$search"
+            label="Search" />
         </VCol>
       </VRow>
-      <VRow>
-        <VCol>
-          <VLabel>Call Logs</VLabel>
-        </VCol>
+      <VRow class="mt-4" justify="space-between">
+        <VLabel>Call Logs</VLabel>
+        <VBtn variant="text" color="primary" to="/calls/credits" class="px-0">Credits</VBtn>
       </VRow>
       <VRow>
         <VCol>
