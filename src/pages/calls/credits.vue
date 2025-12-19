@@ -25,9 +25,13 @@ import { callLog } from '@/calls/registry';
                 <VCardText>
                   <VRow>
                     <VList density="comfortable">
-                      <VListItem prepend-icon="$call" title="Call Link" :to="`/calls/${log.id}`"></VListItem>
-                      <VListItem prepend-icon="$edit" :title="`Writer: ${log.author}`"></VListItem>
-                      <VListItem prepend-icon="$speaker" :title="`Speaker: ${log.voiced}`"></VListItem>
+                      <VListItem prepend-icon="$call" title="Call Link" :to="`/calls/${log.id}`" />
+                      <VListItem prepend-icon="$edit" :title="`Writer: ${log.author}`" />
+                      <VListItem prepend-icon="$speaker" :title="`Speaker: ${log.voiced}`" />
+                      <VListItem prepend-icon="$book" title="Script:" />
+                      <VCardText class="text-body-2">
+                        {{ log.script }}
+                      </VCardText>
                     </VList>
                   </VRow>
                 </VCardText>
