@@ -24,7 +24,7 @@ const filteredCallLog = computed(() => {
   const q = search.value.toLowerCase()
 
   return callLog.filter(log =>
-    log.title.toLowerCase().includes(q) || log.author.toLowerCase().includes(q) || log.voiced.toLowerCase().includes(q)
+    log.title.toLowerCase().includes(q)
   )
 })
 
@@ -105,7 +105,7 @@ onUnmounted(() => {
       <VRow>
         <VCol>
           <VTextField v-model="search" single-line clearable persistent-clear density="compact" rounded
-            bg-color="#ffffff" variant="solo" hide-details placeholder="Title or author/voice"
+            bg-color="#ffffff" variant="solo" hide-details placeholder="Search by Title"
             prepend-inner-icon="$search" label="Search" />
         </VCol>
       </VRow>
