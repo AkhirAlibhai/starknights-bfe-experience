@@ -11,6 +11,8 @@ export const callLog: CallDefinition[] = callData.map((c, i) => {
     id: i,
     avatar: c.avatar ?? DEFAULT_AVATAR,
     title: c.title,
+    author: c.author,
+    voiced: c.voiced,
     missed: !!c.missed,
     voicemail: !!c.voicemail,
     timestamp: c.timestamp,
