@@ -8,13 +8,26 @@
 <script setup lang="ts">
 import { type CallDefinition } from '@/calls/call';
 import { callLog } from '@/calls/registry';
+import { computed } from 'vue'
 
 const opened = ref<number[]>([]);
+const search = ref('')
 
 const audioRefs = ref<Record<number, HTMLAudioElement>>({});
 const audioStates = ref<Record<number, { currentTime: number; duration: number; playing: boolean }>>({});
 
 let lastPlayed = -1;
+
+const filteredCallLog = computed(() => {
+  if (!search.value) return callLog
+
+  const q = search.value.toLowerCase()
+
+  return callLog.filter(log =>
+    log.title.toLowerCase().includes(q)
+  )
+})
+
 
 const displayTime = (time: number) => {
   const sec = Math.round(time % 60);
@@ -91,19 +104,20 @@ onUnmounted(() => {
     <VContainer fluid>
       <VRow>
         <VCol>
-          <VTextField single-line clearable persistent-clear density="compact" rounded bg-color="#ffffff" variant="solo"
-            hide-details placeholder="Number or contact name" prepend-inner-icon="$search" label="Search" />
+          <VTextField v-model="search" single-line clearable persistent-clear density="compact" rounded
+            bg-color="#ffffff" variant="solo" hide-details placeholder="Search by Title" prepend-inner-icon="$search"
+            label="Search" />
         </VCol>
+      </VRow>
+      <VRow class="mt-4" justify="space-between">
+        <VLabel>Call Logs</VLabel>
+        <VBtn variant="text" color="primary" to="/calls/credits" class="px-0">Credits</VBtn>
       </VRow>
       <VRow>
         <VCol>
-          <VLabel>Call Logs</VLabel>
-        </VCol>
-      </VRow>
-      <VRow>
-        <VCol>
-          <VList density="comfortable" rounded="xl" open-strategy="single" v-model:opened="opened">
-            <VListGroup v-for="log in callLog" :key="log.id" :value="log.id" @click="initializeAudio(log)">
+          <VList v-if="filteredCallLog.length" density="comfortable" rounded="xl" open-strategy="single"
+            v-model:opened="opened">
+            <VListGroup v-for="log in filteredCallLog" :key="log.id" :value="log.id" @click="initializeAudio(log)">
               <template #activator="{ props }">
                 <VListItem :prepend-avatar="log.avatar" :title="log.title" v-bind="props">
                   <template #subtitle>
@@ -164,6 +178,9 @@ onUnmounted(() => {
               <VDivider />
             </VListGroup>
           </VList>
+          <VCard v-else class="pa-4 text-center">
+            No call logs found.
+          </VCard>
         </VCol>
       </VRow>
     </VContainer>

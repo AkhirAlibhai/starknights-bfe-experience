@@ -14,6 +14,7 @@ import { aliases, mdi } from "vuetify/iconsets/mdi-svg";
 
 // Icons
 
+import IconEdit from "~icons/material-symbols/edit";
 import IconText from "~icons/material-symbols/android-messages";
 import IconPhone from "~icons/material-symbols/call";
 import IconCallMissed from "~icons/material-symbols/call-missed";
@@ -26,6 +27,7 @@ import IconVidcall from "~icons/material-symbols/video-call";
 import IconVoicemail from "~icons/material-symbols/voicemail";
 import IconMute from "~icons/material-symbols/volume-off";
 import IconSpeaker from "~icons/material-symbols/volume-up";
+import IconBook from "~icons/material-symbols/book";
 
 const Register: Plugin = (app) => {
 	return app.use(
@@ -50,6 +52,8 @@ const Register: Plugin = (app) => {
 					call: IconPhone,
 					vidcall: IconVidcall,
 					text: IconText,
+					edit: IconEdit,
+					book: IconBook,
 				},
 				sets: {
 					mdi,
