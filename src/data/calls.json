@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "avatar": "https://i.pravatar.cc/300?u=001",
+    "avatar": "/avatars/isekai-knight.png",
     "title": "Jelly Boyfriend Isekai",
     "author": "Turminal",
     "voiced": "Turminal",
@@ -23,7 +23,9 @@
   },
   {
     "id": 3,
-    "avatar": "https://i.pravatar.cc/300?u=002",
+    "avatar": "/avatars/demoncore-knight.png",
+    "author": "Martian",
+    "voiced": "Ghardyne",
     "title": "Being held up!",
     "missed": true,
     "voicemail": false,
@@ -42,6 +44,7 @@
   },
   {
     "id": 5,
+    "avatar": "/avatars/starsnob-with-smoke.png",
     "title": "The Value of Jelly",
     "author": "Lucan",
     "voiced": "Lucan",
@@ -52,6 +55,7 @@
   },
   {
     "id": 6,
+    "avatar": "/avatars/star-yaranaika.png",
     "title": "Not in game yet",
     "author": "Coosome",
     "voiced": "Janus",
@@ -114,5 +118,16 @@
     "voicemail": false,
     "timestamp": "2025-12-07T07:00:00.000",
     "audio": "https://audio.jukehost.co.uk/AYTEZfZ3YFPfAOeYJyDEAdTIXdhxB8S7"
+  },
+  {
+    "id": 12,
+    "avatar": "/avatars/starminer.png",
+    "title": "Into the mines",
+    "author": "Grey01",
+    "voiced": "Grey01",
+    "missed": false,
+    "voicemail": false,
+    "timestamp": "2025-12-07T08:00:00.000",
+    "audio": "https://audio.jukehost.co.uk/CghTkk8LX79oMbVvTZvFqxuo2yiWJ3Rl"
   }
 ]
