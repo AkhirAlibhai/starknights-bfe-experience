@@ -41,5 +41,6 @@ export const apps: AppDefinition[] = [
 		name: "Jorb",
 		icon: Jorb,
 		backgroundColor: "transparent",
+		route: "/jorb",
 	},
 ];
