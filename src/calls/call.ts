@@ -4,8 +4,6 @@ export interface CallDefinition {
 	title: string;
 	author: string;
 	voiced: string;
-	missed: boolean;
-	voicemail: boolean;
 	timestamp: string;
 	audio: string;
 	script: string;
