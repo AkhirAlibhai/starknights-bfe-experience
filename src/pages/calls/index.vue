@@ -122,8 +122,8 @@ onUnmounted(() => {
                 <VListItem :prepend-avatar="log.avatar" :title="log.title" v-bind="props">
                   <template #subtitle>
                     <VLabel>
-                      <VIcon v-if="log.missed" icon="$callMissed" color="error" class="ms-2" />
-                      <VIcon v-if="log.voicemail" icon="$voicemail" color="success" />
+                      <VIcon icon="$callMissed" color="error" class="ms-2" />
+                      <VIcon icon="$voicemail" color="success" />
                       {{ log.date }}
                     </VLabel>
                   </template>

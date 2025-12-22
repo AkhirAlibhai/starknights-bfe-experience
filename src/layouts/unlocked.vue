@@ -24,12 +24,9 @@ const defaultOpened = ref(0);
                 <VExpansionPanelText>
                   <p>This app would not be possible without the hard work of the people below:</p>
                   <VList>
-                    <VListItem title="Vue Team" prepend-icon="$search"></VListItem>
-                    <VListItem title="Vuetify Team"></VListItem>
+                    <VListItem title="Jelly Hoshiumi"></VListItem>
                   </VList>
                 </VExpansionPanelText>
-              </VExpansionPanel>
-              <VExpansionPanel title="License" :value="2" text="MIT License">
               </VExpansionPanel>
             </VExpansionPanels>
           </VCardText>
