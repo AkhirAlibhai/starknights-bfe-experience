@@ -5,6 +5,9 @@ import JannualIcon from "~icons/material-symbols/bar-chart-4-bars";
 import PhoneIcon from "~icons/material-symbols/phone-enabled";
 import SolitaireIcon from "~icons/material-symbols/cards-star";
 
+import { callLog } from "@/calls/registry.ts";
+const callBadge = callLog.length;
+
 export const apps: AppDefinition[] = [
 	{
 		id: "gallery",
@@ -17,14 +20,13 @@ export const apps: AppDefinition[] = [
 		name: "Jannual Jeport",
 		icon: JannualIcon,
 		backgroundColor: "blue",
-		badge: 2,
 	},
 	{
 		id: "calls",
 		name: "Jhone",
 		icon: PhoneIcon,
 		backgroundColor: "limegreen",
-		badge: 3,
+		badge: callBadge,
 		route: "/calls",
 	},
 	{
