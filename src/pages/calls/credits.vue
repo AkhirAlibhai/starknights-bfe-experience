@@ -16,6 +16,13 @@ import { callLog } from '@/calls/registry';
     <VContainer fluid>
       <VRow>
         <VCol>
+          <VLabel>Project Lead</VLabel>
+          <VListItem title="Awa+Anon" />
+        </VCol>
+      </VRow>
+      <VRow>
+        <VCol>
+          <VLabel>Call Logs</VLabel>
           <VList density="comfortable" rounded="xl" open-strategy="single">
             <VListGroup v-for="log in callLog">
               <template #activator="{ props }">
@@ -39,6 +46,13 @@ import { callLog } from '@/calls/registry';
               <VDivider />
             </VListGroup>
           </VList>
+        </VCol>
+      </VRow>
+      <VRow>
+        <VCol>
+          <VLabel>Code Monkeys</VLabel>
+          <VListItem title="Brownie" />
+          <VListItem title="computed_fn" />
         </VCol>
       </VRow>
     </VContainer>
