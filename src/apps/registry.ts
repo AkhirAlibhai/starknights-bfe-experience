@@ -4,6 +4,7 @@ import GalleryIcon from "~icons/material-symbols/photo-library";
 import JannualIcon from "~icons/material-symbols/bar-chart-4-bars";
 import PhoneIcon from "~icons/material-symbols/phone-enabled";
 import SolitaireIcon from "~icons/material-symbols/cards-star";
+import Jorb from "@/assets/jorb.gif";
 
 import { callLog } from "@/calls/registry.ts";
 const callBadge = callLog.length;
@@ -34,5 +35,11 @@ export const apps: AppDefinition[] = [
 		name: "Jolitaire",
 		icon: SolitaireIcon,
 		backgroundColor: "crimson",
+	},
+	{
+		id: "jorb",
+		name: "Jorb",
+		icon: Jorb,
+		backgroundColor: "transparent",
 	},
 ];
