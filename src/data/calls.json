@@ -32,6 +32,7 @@
   {
     "id": 4,
     "title": "Love and e-Sports",
+    "avatar": "/avatars/arcade-knight.png",
     "author": "Karimono & Paquete",
     "voiced": "Paquete",
     "timestamp": "2025-12-07T00:00:00.000",
@@ -131,6 +132,7 @@
   {
     "id": 14,
     "title": "Boyfriend in the Backrooms",
+    "avatar": "/avatars/backrooms-knight.png",
     "author": "BuncyTheFrog",
     "voiced": "BuncyTheFrog",
     "timestamp": "2025-12-07T10:00:00.000",
