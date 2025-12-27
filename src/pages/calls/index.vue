@@ -19,11 +19,13 @@ const audioStates = ref<Record<number, { currentTime: number; duration: number; 
 let lastPlayed = -1;
 
 const filteredCallLog = computed(() => {
-  if (!search.value) return callLog
+  const sortedLog = callLog.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+  if (!search.value) return sortedLog
 
   const q = search.value.toLowerCase()
 
-  return callLog.filter(log =>
+  return sortedLog.filter(log =>
     log.title.toLowerCase().includes(q)
   )
 })
