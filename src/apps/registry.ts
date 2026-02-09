@@ -41,6 +41,12 @@ export const apps: AppDefinition[] = [
 		name: "Jorb",
 		icon: Jorb,
 		backgroundColor: "transparent",
-		route: "/jorb",
+		action: () => {
+			window.open(
+				"https://www.youtube.com/watch?v=sN55iC6xhxA",
+				"_blank",
+				"noopener,noreferrer",
+			);
+		},
 	},
 ];
