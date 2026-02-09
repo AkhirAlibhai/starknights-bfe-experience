@@ -1,5 +1,5 @@
 <script setup>
-import { defineProps, ref, onMounted, computed } from "vue";
+import { ref, onMounted, computed } from "vue";
 import StatusBar from "@/components/status-bar/StatusBar.vue";
 
 const props = defineProps({
