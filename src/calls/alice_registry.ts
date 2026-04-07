@@ -3,14 +3,14 @@ import type { CallDefinition } from "@/calls/call";
 import callData from "@/data/alice_calls.json";
 
 const DEFAULT_AVATAR = "/avatars/alice.jpg";
-const BUCKET_ALICE_ROOT = "alice-audio-files";
+const BUCKET_ALICE_ROOT = "https://data.starknights.app/alice-audio-files/";
 
 function buildAudioUrl(id: number, title: string): string {
 	const filename = `${id} - ${title}.mp3`;
 	return BUCKET_ALICE_ROOT + encodeURIComponent(filename);
 }
 
-export const aliceCallLog: CallDefinition[] = callData.map((c, i) => {
+export const callLog: CallDefinition[] = callData.map((c, i) => {
 	const date = useDateFormat(c.timestamp, "MMM D, YYYY, HH:mm").value;
 
 	return {
