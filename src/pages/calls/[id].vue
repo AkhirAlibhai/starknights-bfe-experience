@@ -25,6 +25,9 @@ const selectedCall = computed(() => {
     const split_id = id.value.split("alice_")
     return aliceCallLog[Number(split_id[1])]
   }
+  else if (Number(id.value) < 0) {
+    return aliceCallLog[Math.abs(Number(id.value))]
+  }
   return callLog[Number(id.value)]
 })
 
