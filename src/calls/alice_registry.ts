@@ -10,7 +10,7 @@ function buildAudioUrl(id: number, title: string): string {
 	return BUCKET_ALICE_ROOT + encodeURIComponent(filename);
 }
 
-export const callLog: CallDefinition[] = callData.map((c, i) => {
+export const aliceCallLog: CallDefinition[] = callData.map((c, i) => {
 	const date = useDateFormat(c.timestamp, "MMM D, YYYY, HH:mm").value;
 
 	return {

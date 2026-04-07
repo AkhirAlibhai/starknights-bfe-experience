@@ -12,15 +12,20 @@ import { useSound } from "@vueuse/sound"
 
 import DialingFail from "@/assets/tone_fail.wav"
 import { callLog } from '@/calls/registry'
+import { aliceCallLog } from '@/calls/alice_registry'
 
 const route = useRoute()
 const id = computed(() => {
   const params = route.params as { id: string }
-  return Number(params.id)
+  return String(params.id)
 })
 
 const selectedCall = computed(() => {
-  return callLog[id.value]
+  if (id.value.startsWith("alice_")) {
+    const split_id = id.value.split("alice_")
+    return aliceCallLog[Number(split_id[1])]
+  }
+  return callLog[Number(id.value)]
 })
 
 const dialFailTone = useSound(DialingFail)
