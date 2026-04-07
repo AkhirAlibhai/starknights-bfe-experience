@@ -7,19 +7,29 @@
 
 <script setup lang="ts">
 import { type CallDefinition } from '@/calls/call';
+import { aliceCallLog } from '@/calls/alice_registry';
 import { callLog } from '@/calls/registry';
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 
+const mode = ref<'BFE' | 'Alice'>('BFE');
 const opened = ref<number[]>([]);
 const search = ref('')
-
 const audioRefs = ref<Record<number, HTMLAudioElement>>({});
 const audioStates = ref<Record<number, { currentTime: number; duration: number; playing: boolean }>>({});
 
-let lastPlayed = -1;
+let lastPlayed = NaN;
 
 const filteredCallLog = computed(() => {
-  const sortedLog = callLog.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  let sortedLog: CallDefinition[];
+  if (mode.value === "Alice") {
+    sortedLog = [...aliceCallLog].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).map(item => ({
+      ...item,
+      id: Number(item.id) * -1
+    }));
+  } else {
+    sortedLog = [...callLog].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  }
+
 
   if (!search.value) return sortedLog
 
@@ -39,34 +49,37 @@ const displayTime = (time: number) => {
 
 
 function initializeAudio(log: CallDefinition) {
-  if (!audioRefs.value[log.id]) {
+  const modifier = mode.value === "BFE" ? 1 : -1;
+  // Getting the absolute value of the id so we don't double apply here
+  const id = Math.abs(log.id) * modifier;
+  if (!audioRefs.value[id]) {
     const audioElement = new Audio(log.audio);
-    audioRefs.value[log.id] = audioElement;
+    audioRefs.value[id] = audioElement;
 
-    audioStates.value[log.id] = {
+    audioStates.value[id] = {
       currentTime: 0,
       duration: 0,
       playing: false,
     };
 
     audioElement.addEventListener("loadedmetadata", () => {
-      audioStates.value[log.id].duration = audioElement.duration;
+      audioStates.value[id].duration = audioElement.duration;
     });
 
     audioElement.addEventListener("timeupdate", () => {
-      audioStates.value[log.id].currentTime = audioElement.currentTime;
+      audioStates.value[id].currentTime = audioElement.currentTime;
     });
 
     audioElement.addEventListener("play", () => {
-      audioStates.value[log.id].playing = true;
+      audioStates.value[id].playing = true;
 
-      if (lastPlayed !== -1 && lastPlayed !== log.id) {
+      if (lastPlayed !== -1 && lastPlayed !== id) {
         pauseAudio(lastPlayed);
       }
-      lastPlayed = log.id;
+      lastPlayed = id;
     });
     audioElement.addEventListener("pause", () => {
-      audioStates.value[log.id].playing = false;
+      audioStates.value[id].playing = false;
     });
   }
 }
@@ -106,20 +119,30 @@ onUnmounted(() => {
     <VContainer fluid>
       <VRow>
         <VCol>
-          <VTextField v-model="search" single-line clearable persistent-clear density="compact" rounded
-            bg-color="#ffffff" variant="solo" hide-details placeholder="Search by Title" prepend-inner-icon="$search"
-            label="Search" />
+          <VTextField v-model="search" single-line clearable density="compact" rounded bg-color="#ffffff" variant="solo"
+            hide-details placeholder="Search by Title" prepend-inner-icon="$search" />
+        </VCol>
+      </VRow>
+
+      <VRow class="mt-2" dense>
+        <VCol class="d-flex justify-center">
+          <VBtnToggle v-model="mode" mandatory rounded="xl" color="primary" density="compact">
+            <VBtn value="BFE">BFE</VBtn>
+            <VBtn value="Alice">Alice</VBtn>
+          </VBtnToggle>
         </VCol>
       </VRow>
       <VRow class="mt-4" justify="space-between">
         <VLabel>Call Logs</VLabel>
         <VBtn variant="text" color="primary" to="/calls/credits" class="px-0">Credits</VBtn>
       </VRow>
+
       <VRow>
         <VCol>
           <VList v-if="filteredCallLog.length" density="comfortable" rounded="xl" open-strategy="single"
             v-model:opened="opened">
             <VListGroup v-for="log in filteredCallLog" :key="log.id" :value="log.id" @click="initializeAudio(log)">
+
               <template #activator="{ props }">
                 <VListItem :prepend-avatar="log.avatar" :title="log.title" v-bind="props">
                   <template #subtitle>
@@ -181,7 +204,7 @@ onUnmounted(() => {
             </VListGroup>
           </VList>
           <VCard v-else class="pa-4 text-center">
-            No call logs found.
+            <div>No {{ mode }} logs found.</div>
           </VCard>
         </VCol>
       </VRow>
